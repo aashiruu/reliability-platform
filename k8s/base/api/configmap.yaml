@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+data:
+  REDIS_HOST: "reliability-redis.qm4ji3.0001.use1.cache.amazonaws.com"
+  DATABASE_URL: "postgresql://postgres:ReliabilityPass123@terraform-20260422215618418900000001.cspu4mm0yw9u.us-east-1.rds.amazonaws.com:5432/reliabilitydb"
