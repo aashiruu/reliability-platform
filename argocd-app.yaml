@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reliability-api
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/aashiruu/reliability-platform.git
+    targetRevision: HEAD
+    path: k8s/base/api
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
