@@ -4,10 +4,11 @@ import redis
 from sqlalchemy import create_engine, Column, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
-# ENV Variables to be injected by K8s later
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:ReliabilityPass123@localhost/reliabilitydb")
 
