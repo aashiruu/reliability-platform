@@ -2,7 +2,7 @@
 An end-to-end, production-ready cloud infrastructure designed for high availability and deep observability. This platform leverages Infrastructure as Code (IaC) to provision a resilient environment on AWS, featuring a self-healing microservice architecture.
 
 ### System Architecture
-<img width="498" height="512" alt="1777292390499444664447693381777" src="https://github.com/user-attachments/assets/3283b3fa-e5f3-4b7b-b52f-da2393cc599c" />
+![Architecture](terraform/graph.png)
 
 The full architecture includes a Multi-AZ VPC, managed RDS/Redis, and an EKS cluster with optimized pod density.
 
