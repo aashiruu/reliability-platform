@@ -36,12 +36,12 @@ The FastAPI application is instrumented to export real-time metrics. A custom Gr
 
 ### Technical Challenges & Solutions
 **The "Pod Density" hurdle**
-Problem: On t3.small nodes, the default ENI limit capped pod capacity at 11 per node, preventing the heavy Prometheus stack from scheduling.
-Solution: Implemented VPC Prefix Delegation and scaled the node group to 4 managed nodes to provide enough IP headroom for the monitoring stack and application.
+• Problem: On t3.small nodes, the default ENI limit capped pod capacity at 11 per node, preventing the heavy Prometheus stack from scheduling.
+• Solution: Implemented VPC Prefix Delegation and scaled the node group to 4 managed nodes to provide enough IP headroom for the monitoring stack and application.
 
 **Persistent Storage for Metrics**
-Problem: Prometheus requires persistent storage to keep metric history across restarts.
-Solution: Configured the AWS EBS CSI Driver with appropriate IAM OpenID Connect (OIDC) roles to allow dynamic provisioning of EBS volumes as PersistentVolumeClaims (PVCs).
+• Problem: Prometheus requires persistent storage to keep metric history across restarts.
+• Solution: Configured the AWS EBS CSI Driver with appropriate IAM OpenID Connect (OIDC) roles to allow dynamic provisioning of EBS volumes as PersistentVolumeClaims (PVCs).
 
 ### Proof of Life
 API Response
