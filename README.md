@@ -48,21 +48,21 @@ The FastAPI application is instrumented to export real-time metrics. A custom Gr
 ### Proof of Life
 * API Response
 
-<img width="512" height="292" alt="17772924595534312983857686218165" src="https://github.com/user-attachments/assets/865e1c50-54a8-46a6-9dd4-ddacc19c7770" />
+<img width="512" height="292" alt="image" src="https://github.com/user-attachments/assets/d0cf4db5-4c3d-4873-ba15-283a1417f198" />
 
 *Confirmed connection between FastAPI, RDS Postgres, and ElastiCache Redis.*
 
 * ArgoCD Synchronization
 
-<img width="512" height="253" alt="17772925287598907773661681840936" src="https://github.com/user-attachments/assets/fac7c517-b2cc-481e-be9d-1aca3665429b" />
+<img width="512" height="253" alt="image" src="https://github.com/user-attachments/assets/c48dacfe-c8e4-4142-9952-46c1ba9aa927" />
 
 * Grafana Metrics
 
-<img width="512" height="243" alt="17772925666111149945519685498099" src="https://github.com/user-attachments/assets/d88ad672-1736-4517-8010-2322e1db0268" />
+<img width="512" height="243" alt="image" src="https://github.com/user-attachments/assets/a0104a41-145e-4a31-af2f-b75ecea28caa" />
 
 .
 
-<img width="512" height="243" alt="17772925966503129322321059952847" src="https://github.com/user-attachments/assets/8cbe3957-cbbe-437d-926e-8b1d35344917" />
+<img width="512" height="243" alt="image" src="https://github.com/user-attachments/assets/35f519c6-52f3-46c8-8f56-398933efaf46" />
 
 ### How to Run (Local)
 **Infrastructure**: 
