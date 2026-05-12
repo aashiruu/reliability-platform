@@ -3,6 +3,7 @@ An end-to-end, production-ready cloud infrastructure designed for high availabil
 
 ### System Architecture
 ![Architecture](terraform/graph.png)
+
 graph TD
     %% Main Resources
     aws_db_instance.postgres --> aws_security_group.rds_sg
@@ -41,6 +42,7 @@ graph TD
     %% Key Dependencies
     module.eks.aws_eks_cluster.this --> module.vpc.aws_subnet.private
     module.eks.kubernetes_config_map.aws_auth --> module.eks.module.eks_managed_node_group.aws_iam_role.this
+    
     
     
 The full architecture includes a Multi-AZ VPC, managed RDS/Redis, and an EKS cluster with optimized pod density.
