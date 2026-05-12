@@ -13,7 +13,7 @@ graph TD
     aws_elasticache_subnet_group.redis_subnet_group --> module.vpc.aws_subnet.database
     aws_security_group.rds_sg --> module.eks.aws_security_group.node
     aws_security_group.redis_sg --> module.eks.aws_security_group.node
-
+```
     subgraph "module.eks"
         module.eks.aws_eks_cluster.this --> module.eks.aws_cloudwatch_log_group.this
         module.eks.aws_eks_cluster.this --> module.eks.aws_iam_policy.cni_ipv6_policy
@@ -42,7 +42,7 @@ graph TD
     %% Key Dependencies
     module.eks.aws_eks_cluster.this --> module.vpc.aws_subnet.private
     module.eks.kubernetes_config_map.aws_auth --> module.eks.module.eks_managed_node_group.aws_iam_role.this
-    
+```
     
     
 The full architecture includes a Multi-AZ VPC, managed RDS/Redis, and an EKS cluster with optimized pod density.
