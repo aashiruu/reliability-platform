@@ -42,6 +42,7 @@ graph TD
     module.eks.aws_eks_cluster.this --> module.vpc.aws_subnet.private
     module.eks.kubernetes_config_map.aws_auth --> module.eks.module.eks_managed_node_group.aws_iam_role.this
     
+    
 The full architecture includes a Multi-AZ VPC, managed RDS/Redis, and an EKS cluster with optimized pod density.
 
 **Cloud Provider**: AWS (VPC, EKS, RDS, ElastiCache, IAM)
