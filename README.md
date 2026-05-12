@@ -3,7 +3,45 @@ An end-to-end, production-ready cloud infrastructure designed for high availabil
 
 ### System Architecture
 ![Architecture](terraform/graph.png)
+graph TD
+    %% Main Resources
+    aws_db_instance.postgres --> aws_security_group.rds_sg
+    aws_db_instance.postgres --> module.vpc.aws_db_subnet_group.database
+    aws_elasticache_cluster.redis --> aws_elasticache_subnet_group.redis_subnet_group
+    aws_elasticache_cluster.redis --> aws_security_group.redis_sg
+    aws_elasticache_subnet_group.redis_subnet_group --> module.vpc.aws_subnet.database
+    aws_security_group.rds_sg --> module.eks.aws_security_group.node
+    aws_security_group.redis_sg --> module.eks.aws_security_group.node
 
+    subgraph "module.eks"
+        module.eks.aws_eks_cluster.this --> module.eks.aws_cloudwatch_log_group.this
+        module.eks.aws_eks_cluster.this --> module.eks.aws_iam_policy.cni_ipv6_policy
+        module.eks.aws_eks_cluster.this --> module.eks.aws_iam_role_policy_attachment.this
+        module.eks.aws_eks_cluster.this --> module.eks.aws_security_group_rule.cluster
+        module.eks.aws_eks_cluster.this --> module.eks.aws_security_group_rule.node
+        module.eks.aws_iam_openid_connect_provider.oidc_provider --> module.eks.data.tls_certificate.this
+        module.eks.aws_iam_policy.cluster_encryption --> module.eks.module.kms.aws_kms_key.this
+        module.eks.aws_iam_role.this --> module.eks.data.aws_iam_policy_document.assume_role_policy
+        module.eks.aws_security_group.cluster --> module.vpc.aws_vpc.this
+        module.eks.aws_security_group.node --> module.vpc.aws_vpc.this
+    end
+
+    subgraph "module.eks.module.eks_managed_node_group"
+        module.eks.module.eks_managed_node_group.aws_eks_node_group.this --> module.eks.aws_eks_cluster.this
+        module.eks.module.eks_managed_node_group.aws_launch_template.this --> module.eks.aws_security_group.node
+    end
+
+    subgraph "module.vpc"
+        module.vpc.aws_nat_gateway.this --> module.vpc.aws_eip.nat
+        module.vpc.aws_internet_gateway.this --> module.vpc.aws_vpc.this
+        module.vpc.aws_subnet.private --> module.vpc.aws_route_table.private
+        module.vpc.aws_subnet.public --> module.vpc.aws_route_table.public
+    end
+
+    %% Key Dependencies
+    module.eks.aws_eks_cluster.this --> module.vpc.aws_subnet.private
+    module.eks.kubernetes_config_map.aws_auth --> module.eks.module.eks_managed_node_group.aws_iam_role.this
+    
 The full architecture includes a Multi-AZ VPC, managed RDS/Redis, and an EKS cluster with optimized pod density.
 
 **Cloud Provider**: AWS (VPC, EKS, RDS, ElastiCache, IAM)
